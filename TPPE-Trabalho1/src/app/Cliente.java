@@ -18,8 +18,6 @@ public class Cliente {
         this.ehPrime = ehPrime;
     }
 
-
-
 	public int getId() {
         return id;
     }
