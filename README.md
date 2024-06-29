@@ -15,7 +15,6 @@
 
 - **Java**: Utilizado como a linguagem principal de desenvolvimento do projeto.
 - **JUnit 4**: Framework de testes usado para implementar o Desenvolvimento Orientado a Testes (TDD).
-- **Maven**: Gerenciador de dependências e automação de build.
 - **Git**: Sistema de controle de versão para rastreamento de mudanças no código.
 - **IDE (como IntelliJ ou Eclipse)**: Ambiente de desenvolvimento integrado para facilitar a codificação e testes.
 
