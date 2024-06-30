@@ -3,42 +3,40 @@ package teste;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
 import app.Cliente;
 
 public class ClienteTest {
 
-	@Test
+    @Test
     public void cadastrarCliente() {
-		// cadastrar da capital, nao prime
-        Cliente cliente = new Cliente(1, "Mariana", 2 , true, false);
-        assertEquals(1, cliente.getId()); 
+        // Cadastrar cliente da capital, n茫o prime
+        Cliente cliente = new Cliente(1, "Mariana", 2, true, false);
+        assertEquals(1, cliente.getId());
         assertEquals("Mariana", cliente.getNome());
-        assertEquals(2, cliente.getEstado()); 
-        assertTrue(cliente.getEhCapital()); 
-        assertFalse(cliente.getEhPrime());
-    }
-	
-	@Test
-    public void cadastrarPrime() {
-		// cadastrar cliente prime, da capital
-        Cliente cliente = new Cliente(1, "Paulinho Ant鬾io", 2 , true, true);
-        assertEquals(1, cliente.getId()); 
-        assertEquals("Paulinho Ant鬾io", cliente.getNome());
-        assertEquals(2, cliente.getEstado()); 
-        assertTrue(cliente.getEhCapital()); 
-        assertTrue(cliente.getEhPrime());
-    }
-	
-	@Test
-    public void cadastrarNaoCapital() {
-		// cadastrar cliente do interior e n鉶 prime
-        Cliente cliente = new Cliente(1, "Paulinho Ant鬾io", 2 , false, false);
-        assertEquals(1, cliente.getId()); 
-        assertEquals("Paulinho Ant鬾io", cliente.getNome());
-        assertEquals(2, cliente.getEstado()); 
-        assertFalse(cliente.getEhCapital()); 
+        assertEquals(2, cliente.getEstado());
+        assertTrue(cliente.getEhCapital());
         assertFalse(cliente.getEhPrime());
     }
 
+    @Test
+    public void cadastrarPrime() {
+        // Cadastrar cliente prime, da capital
+        Cliente cliente = new Cliente(2, "Paulinho Ant么nio", 2, true, true);
+        assertEquals(2, cliente.getId());
+        assertEquals("Paulinho Ant么nio", cliente.getNome());
+        assertEquals(2, cliente.getEstado());
+        assertTrue(cliente.getEhCapital());
+        assertTrue(cliente.getEhPrime());
+    }
+
+    @Test
+    public void cadastrarNaoCapital() {
+        // Cadastrar cliente do interior e n茫o prime
+        Cliente cliente = new Cliente(3, "Paulinho Ant么nio", 2, false, false);
+        assertEquals(3, cliente.getId());
+        assertEquals("Paulinho Ant么nio", cliente.getNome());
+        assertEquals(2, cliente.getEstado());
+        assertFalse(cliente.getEhCapital());
+        assertFalse(cliente.getEhPrime());
+    }
 }

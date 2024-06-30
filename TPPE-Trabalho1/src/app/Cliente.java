@@ -30,6 +30,10 @@ public class Cliente {
         return ehPrime;
     }
 
+    public void setEhPrime(boolean ehPrime) {
+        this.ehPrime = ehPrime;
+    }
+    
     public int getEstado() {
 		return estado;
 	}
@@ -37,7 +41,6 @@ public class Cliente {
     public boolean getEhCapital() {
 		return ehCapital;
 	}
-
 
     public double getSaldoCashback() {
         return saldoCashback;
