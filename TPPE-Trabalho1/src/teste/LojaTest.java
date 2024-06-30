@@ -12,16 +12,17 @@ public class LojaTest {
     @Test
     public void cadastroDoisClientes() {
     	Loja loja = new Loja();
-        loja.setClientes(new ArrayList<>());
-        Cliente cliente1 = new Cliente(1, "Mariana", 2 , true, false);
-        Cliente cliente2 = new Cliente(2, "Paulinho Ant鬾io", 2 , true, true);
+    	
+    	loja.cadastrarCliente(1, "Mariana", 2 , true, false);
+    	loja.cadastrarCliente(2, "Paulinho Ant么nio", 2 , true, true);
+        
+        Cliente cliente1 = loja.getClientes().get(0);
+        Cliente cliente2 = loja.getClientes().get(1);
 
-        int index1 = loja.cadastroCliente(cliente1);
-        assertEquals("O 韓dice do primeiro cliente deve ser 0", 0, index1);
-        assertEquals("A lista deve conter o cliente1 ap髎 cadastro", cliente1, loja.getClientes().get(index1));
-
-        int index2 = loja.cadastroCliente(cliente2);
-        assertEquals("O 韓dice do segundo cliente deve ser 1", 1, index2);
-        assertEquals("A lista deve conter o cliente2 ap髎 cadastro", cliente2, loja.getClientes().get(index2));
+        assertEquals("A lista deve conter o cliente1 ap贸s cadastro", 1, cliente1.getId());
+        assertEquals("A lista deve conter o cliente2 ap贸s cadastro", 2, cliente2.getId());
+        assertEquals("O nome do cliente1 deve ser Mariana", "Mariana", cliente1.getNome());
+        assertEquals("O nome do cliente2 deve ser Paulinho Ant么nio", "Paulinho Ant么nio", cliente2.getNome());
+    
     }
 }

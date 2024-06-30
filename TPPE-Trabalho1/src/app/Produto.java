@@ -4,7 +4,7 @@ public class Produto {
 	private int codigo;
 	private String descricao;
 	private int valor; // em centavos
-	private String unidade; //(peça, unidade, metro, cm3, etc...)
+	private String unidade; //(peï¿½a, unidade, metro, cm3, etc...)
 	
 	public Produto(int codigo, String descricao, int valor, String unidade) {
 		super();
@@ -13,11 +13,12 @@ public class Produto {
 		this.valor = valor;
 		this.unidade = unidade;
 	}
-	
 	public int getCodigo() {
 		return codigo;
 	}
-	
+	 public void setCodigo(int codigo) {
+	        this.codigo = codigo;
+	   }
 	public String getDescricao() {
 		return descricao;
 	}
@@ -36,9 +37,4 @@ public class Produto {
 	public void setUnidade(String unidade) {
 		this.unidade = unidade;
 	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
-	
-	
 }
