@@ -1,23 +1,134 @@
 package app;
-
-public class Start {
+import java.util.Scanner;
 	// Tipos clientes:
-    // 	1. padr�o
+    // 	1. padr�o
     //  2. especial - fazem compras mensais acima de 100 reais
     // 	3. prime - pagam uma mensalidade de 20 reais
     
-    // Benef�cios
-    // 1. clientes especiais tem como benef�cio 10% de desconto no valor total de compra
-    // 	1.1. podem receber mais 10% no valor total de compra de desconto caso esteja utilizando cart�o de cr�dito da empresa (4296 13XX XXXX XXXX)
-    // 	1.2. ainda ganham os mesmos benef�cios e mais 30% de desconto no valor do frete
+    // Benef�cios
+    // 1. clientes especiais tem como benef�cio 10% de desconto no valor total de compra
+    // 	1.1. podem receber mais 10% no valor total de compra de desconto caso esteja utilizando cart�o de cr�dito da empresa (4296 13XX XXXX XXXX)
+    // 	1.2. ainda ganham os mesmos benef�cios e mais 30% de desconto no valor do frete
     // 2. clientes prime frete gratis
     // 	2.1 cashback 0,03 miserios por real gasto (mas se for no cartao da loja, aumenta muito pra 5 cents)
     //	2.2 cashback pode ser utilizado como desconto em compra
     
     // Impostos
 
-	public static void main(String[] args) {
-		System.out.println("Hello World!");
+//	public static void main(String[] args) {
+//		System.out.println("Hello World!");
+//	}
+	public class Start {
+	    private static Loja loja = new Loja();
+	    private static Scanner scanner = new Scanner(System.in);
+
+	    public static void main(String[] args) {
+	        exibirMenu();
+	    }
+
+	    public static void exibirMenu() {
+	        int opcao;
+	        do {
+	            System.out.println("\nMenu Principal");
+	            System.out.println("1. Cadastrar Cliente");
+	            System.out.println("2. Listar Clientes");
+	            System.out.println("3. Cadastrar Produtos");
+	            System.out.println("4. Listar Produtos");
+	            System.out.println("5. Realizar Venda");
+	            System.out.println("6. Sair");
+	            System.out.print("Escolha uma opção: ");
+	            opcao = scanner.nextInt();
+
+	            switch (opcao) {
+	                case 1:
+	                    cadastrarCliente();
+	                    break;
+	                case 2:
+	                    listarClientes();
+	                    break;
+	                case 3:
+	                    cadastrarProduto();
+	                    break;
+	                case 4:
+	                	listarProdutos();
+	                    break;
+	                case 5:
+	                    cadastrarVenda();
+	                    break;
+	                case 6:
+	                    System.out.println("Saindo...");
+	                    break;
+	                default:
+	                    System.out.println("Opção inválida. Tente novamente.");
+	            }
+	        } while (opcao != 6);
+	    }
+
+	    private static void cadastrarCliente() {
+	        System.out.print("ID: ");
+	        int id = scanner.nextInt();
+	        scanner.nextLine(); // Limpar buffer
+
+	        System.out.print("Nome: ");
+	        String nome = scanner.nextLine();
+
+	        System.out.print("Estado (número): ");
+	        int estado = scanner.nextInt();
+	        scanner.nextLine(); //
+	        
+	        System.out.print("É capital? (sim/não): ");
+	        String respostaCapital = scanner.nextLine();
+	        boolean ehCapital = interpretarBooleano(respostaCapital);
+
+	        System.out.print("É prime? (sim/não): ");
+	        String respostaPrime = scanner.nextLine();
+	        boolean ehPrime = interpretarBooleano(respostaPrime);
+
+	        loja.cadastrarCliente(id, nome, estado, ehCapital, ehPrime);
+	        System.out.println("Cliente cadastrado com sucesso!");
+	    }
+	    private static void cadastrarProduto() {
+	        System.out.print("Código: ");
+	        int codigo = scanner.nextInt();
+	        scanner.nextLine(); // Limpar buffer
+
+	        System.out.print("Descrição: ");
+	        String descricao = scanner.nextLine();
+
+	        System.out.print("Valor de Venda (em centavos): ");
+	        int valorVenda = scanner.nextInt();
+	        scanner.nextLine(); // Limpar buffer
+
+	        System.out.print("Unidade: ");
+	        String unidade = scanner.nextLine();
+
+	        loja.cadastrarProduto(codigo, descricao, valorVenda, unidade);
+	        System.out.println("Produto cadastrado com sucesso!");
+	    }
+	    private static void listarProdutos(){
+	    	System.out.println("\nLista de Produtos:");
+	        for (Produto produto : loja.getProdutos()) {
+	            System.out.println("Código: " + produto.getCodigo() +
+	                               ", Descrição: " + produto.getDescricao() +
+	                               ", Valor: " + produto.getValor() + " centavos" +
+	                               ", Unidade: " + produto.getUnidade());
+	        }
+	    }
+	    private static void cadastrarVenda(){
+	    	
+	    }	    
+	    private static boolean interpretarBooleano(String resposta) {
+	        return resposta.equalsIgnoreCase("s");
+	    }
+
+	    private static void listarClientes() {
+	        System.out.println("\nLista de Clientes:");
+	        for (Cliente cliente : loja.getClientes()) {
+	            System.out.println("ID: " + cliente.getId() + ", Nome: " + cliente.getNome() +
+	                               ", Estado: " + cliente.getEstado() + 
+	                               ", Capital: " + cliente.getEhCapital() + 
+	                               ", Prime: " + cliente.getEhPrime());
+	        }
+	    }
 	}
 
-}
