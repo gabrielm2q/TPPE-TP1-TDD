@@ -165,7 +165,7 @@ import java.util.Scanner;
 	        System.out.println("\nLista de Clientes:");
 	        for (Cliente cliente : loja.getClientes()) {
 	            System.out.println("ID: " + cliente.getId() + ", Nome: " + cliente.getNome() +
-	                               ", Estado: " + cliente.getEstado() + 
+	                               ", Regiao: " + cliente.getRegiao() + 
 	                               ", Capital: " + cliente.getEhCapital() + 
 	                               ", Prime: " + cliente.getEhPrime());
 	        }

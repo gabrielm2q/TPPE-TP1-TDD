@@ -4,10 +4,8 @@ import org.junit.runners.Parameterized.Parameters;
 import org.junit.runners.Parameterized;
 import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
-
-import java.util.Arrays;
 import java.util.Collection;
-import org.junit.Before;
+import java.util.Arrays;
 import org.junit.Test;
 
 import app.ProdutoVenda;
