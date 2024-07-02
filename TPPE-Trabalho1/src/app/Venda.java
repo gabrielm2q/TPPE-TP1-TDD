@@ -2,8 +2,6 @@ package app;
 
 import java.util.ArrayList;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class Venda {

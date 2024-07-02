@@ -31,8 +31,8 @@ public class Loja {
     }
     
     // Cadastro Cliente
-    public void cadastrarCliente(int id, String nome, int estado, boolean ehCapital, boolean ehPrime) {
-        Cliente novoCliente = new Cliente(id, nome, estado, ehCapital, ehPrime);
+    public void cadastrarCliente(int id, String nome, int regiao, boolean ehCapital, boolean ehPrime) {
+        Cliente novoCliente = new Cliente(id, nome, regiao, ehCapital, ehPrime);
         clientes.add(novoCliente);
     }
     

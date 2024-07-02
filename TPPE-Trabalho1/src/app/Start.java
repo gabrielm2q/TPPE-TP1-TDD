@@ -1,4 +1,5 @@
 package app;
+import java.util.ArrayList;
 import java.util.Scanner;
 	// Tipos clientes:
     // 	1. padr�o
@@ -115,8 +116,47 @@ import java.util.Scanner;
 	        }
 	    }
 	    private static void cadastrarVenda(){
+	    	int usrInput = 0, qtdProdutosSelecionados = 0;
+	    	ArrayList<Integer> produtos = new  ArrayList<Integer>();
+	    	
+	    	System.out.println("\nCadastro de Venda: ");
+	    	do {
+	    		System.out.println("\nSelecione a opção desejada: ");
+	    		System.out.println("1 - Listar Produtos");
+	    		System.out.println("2 - Selecionar Produto");
+	    		System.out.println("3 - Sair");
+	    		
+	    		System.out.print("Escolha uma opção: ");
+	            usrInput = scanner.nextInt();
+
+	            switch (usrInput) {
+	                case 1:
+	                    listarProdutos();
+	                    break;
+	                case 2:
+	                    System.out.println("Digite o código do produto desejado: ");
+	                    int codProd = scanner.nextInt();
+	                    produtos.add(codProd);
+	                    qtdProdutosSelecionados++;
+	                    break;
+	                case 3:
+	                	if ( qtdProdutosSelecionados == 0 ) {
+	                		System.out.println("É necessário adicionar ao menos um produto");
+	                		continue;
+	                	}
+	                    System.out.println("\nCarregando o próximo passo!\n");
+	                    break;
+	                default:
+	                    System.out.println("Opção inválida. Tente novamente.");
+	            }
+	    	} while ( usrInput != 3 || qtdProdutosSelecionados == 0 );
+	    	
+	    	// to-do: criar ProdutoVenda e, tendo selecionado o cliente, criar a venda e adicionar à loja
+	    	
+	    	produtos.forEach((element) -> System.out.println("Produto comprado: " + element));
 	    	
 	    }	    
+	    
 	    private static boolean interpretarBooleano(String resposta) {
 	        return resposta.equalsIgnoreCase("s");
 	    }
@@ -125,7 +165,7 @@ import java.util.Scanner;
 	        System.out.println("\nLista de Clientes:");
 	        for (Cliente cliente : loja.getClientes()) {
 	            System.out.println("ID: " + cliente.getId() + ", Nome: " + cliente.getNome() +
-	                               ", Estado: " + cliente.getEstado() + 
+	                               ", Regiao: " + cliente.getRegiao() + 
 	                               ", Capital: " + cliente.getEhCapital() + 
 	                               ", Prime: " + cliente.getEhPrime());
 	        }
