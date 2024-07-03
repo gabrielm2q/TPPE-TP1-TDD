@@ -9,6 +9,7 @@ public class ProdutoVenda {
 		super();
 		this.produto = produto;
 		this.quantidade = quantidade;
+		getValorParcial();
 	}
 	
 	public Produto getProduto() {

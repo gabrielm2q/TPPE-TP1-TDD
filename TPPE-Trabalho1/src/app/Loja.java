@@ -1,6 +1,8 @@
 package app;
 
 import java.util.ArrayList;
+import java.util.Optional;
+import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 public class Loja {
@@ -22,6 +24,15 @@ public class Loja {
     	return produtos;
     }	
     
+    public Cliente getClienteById (int idCliente) {
+    	Optional<Cliente> foundClient = (Optional<Cliente>) clientes.stream()
+    			.filter(cli -> cli.getId() == idCliente)
+                .findFirst();
+    	
+
+    	return foundClient.orElseThrow();
+    }
+    
     // Cadastro Cliente
     public void cadastrarCliente(int id, String nome, int regiao, boolean ehCapital, boolean ehPrime) {
         Cliente novoCliente = new Cliente(id, nome, regiao, ehCapital, ehPrime);
@@ -32,20 +43,23 @@ public class Loja {
     	clientes.add(cli);
     }
     
-    public void validarTipoCliente(Cliente cliente) {
+    public boolean ehEspecial (Cliente cli) {
+    	LocalDateTime dataAtual = LocalDateTime.now();
+    	
         ArrayList<Venda> vendasDoCliente = (ArrayList<Venda>) vendas.stream()
-            .filter(venda -> venda.getCliente().getId() == cliente.getId())
+            .filter(venda -> venda.getCliente().getId() == cli.getId())
+            .filter(venda -> venda.getData().isAfter(dataAtual.minusDays(30)))
             .collect(Collectors.toList());
 
         int totalCompras = vendasDoCliente.stream()
             .mapToInt(Venda::calculaValorTotal)
             .sum();
 
-        if (totalCompras > 50000) { // Exemplo: mais de 500 reais
-            cliente.setEhPrime(true);
-        } else {
-            cliente.setEhPrime(false);
-        }
+        /*
+         * Caso o cliente tenha comprado mais de 100 reais 
+         * no ultimo mes, ele eh um cliente especial
+         * */
+        return (totalCompras > 10000 ? true : false); 
     }
     
     // Cadastro Produto
@@ -59,7 +73,7 @@ public class Loja {
     }
     
     // Venda
-    public void realizarVenda(Venda venda) {
+    public void cadastrarVenda(Venda venda) {
         vendas.add(venda); // Realizar cálculos de frete, descontos, impostos, etc.
     }
     
