@@ -3,12 +3,10 @@ package app;
 public class Cliente {
     private int id;
     private String nome;
-    private boolean ehPrime; // 1 padrao, 2 especial, 3 prime
+    private boolean ehPrime;
     private int regiao; // 0 - DF; 1 - Centro-Oeste; 2 - Nordeste; 3 - Norte; 4 - Sudeste; 5 - Sul;
     private boolean ehCapital;
     private int saldoCashback = 0; // valor em centavos   
-    
-    /// buscar na de vendas as compras do cliente pra determinar o tipo
 
     public Cliente(int id, String nome, int regiao, boolean ehCapital, boolean ehPrime) {
         this.id = id;

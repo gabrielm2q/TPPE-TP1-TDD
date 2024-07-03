@@ -7,33 +7,29 @@ public class Loja {
 	private ArrayList<Cliente> clientes;
     private ArrayList<Produto> produtos;
     private ArrayList<Venda> vendas;
-	// lista de compras -> pra ver se eh especial
 
-    // Loja
     public Loja() {
         this.clientes = new ArrayList<>();
         this.produtos = new ArrayList<>();
         this.vendas = new ArrayList<>();
-        inicializarCliente();
-        inicializarProdutos();
     }
     
-    private void inicializarCliente() {
-    	clientes.add(new Cliente(1, "Mariana", 2, true, true));
-    	clientes.add(new Cliente(2, "Paulinho Antônio", 2, true, true));
-    	clientes.add(new Cliente(3, "Paulinho Antônio", 2, false, false));
+    public ArrayList<Cliente> getClientes() {
+    	return clientes;
     }
     
-    private void inicializarProdutos() {
-        produtos.add(new Produto(1, "areia", 15000 , "m3"));
-        produtos.add(new Produto(2, "cimento", 5000 , "saco"));
-        produtos.add(new Produto(3, "tauba", 2000 , "unidade"));
-    }
+    public ArrayList<Produto> getProdutos() {
+    	return produtos;
+    }	
     
     // Cadastro Cliente
     public void cadastrarCliente(int id, String nome, int regiao, boolean ehCapital, boolean ehPrime) {
         Cliente novoCliente = new Cliente(id, nome, regiao, ehCapital, ehPrime);
         clientes.add(novoCliente);
+    }
+    
+    public void cadastrarCliente(Cliente cli) {
+    	clientes.add(cli);
     }
     
     public void validarTipoCliente(Cliente cliente) {
@@ -58,17 +54,13 @@ public class Loja {
         produtos.add(novoProduto);
     }
     
+    public void cadastrarProduto(Produto novoProduto) {
+        produtos.add(novoProduto);
+    }
+    
     // Venda
     public void realizarVenda(Venda venda) {
-        vendas.add(venda);
-        // Realizar cálculos de frete, descontos, impostos, etc.
+        vendas.add(venda); // Realizar cálculos de frete, descontos, impostos, etc.
     }
     
-    public ArrayList<Cliente> getClientes() {
-        return clientes;
-    }
-    
-    public ArrayList<Produto> getProdutos() {
-        return produtos;
-    }	
 }

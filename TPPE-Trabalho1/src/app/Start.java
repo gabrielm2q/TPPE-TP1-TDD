@@ -24,6 +24,8 @@ import java.util.Scanner;
 	    private static Scanner scanner = new Scanner(System.in);
 
 	    public static void main(String[] args) {
+	    	inicializarCliente();
+	    	inicializarProdutos();
 	        exibirMenu();
 	    }
 
@@ -169,6 +171,18 @@ import java.util.Scanner;
 	                               ", Capital: " + cliente.getEhCapital() + 
 	                               ", Prime: " + cliente.getEhPrime());
 	        }
+	    }
+	    
+	    private static void inicializarCliente() {
+	    	loja.cadastrarCliente(new Cliente(1, "Mariana", 2, true, true));
+	    	loja.cadastrarCliente(new Cliente(2, "Paulinho Antônio", 2, true, true));
+	    	loja.cadastrarCliente(new Cliente(3, "Paulinho Antônio", 2, false, false));
+	    }
+	    
+	    private static void inicializarProdutos() {
+	    	loja.cadastrarProduto(new Produto(1, "areia", 15000 , "m3"));
+	    	loja.cadastrarProduto(new Produto(2, "cimento", 5000 , "saco"));
+	    	loja.cadastrarProduto(new Produto(3, "tauba", 2000 , "unidade"));
 	    }
 	}
 
