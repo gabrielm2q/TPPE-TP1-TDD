@@ -16,7 +16,7 @@
 - **Java**: Utilizado como a linguagem principal de desenvolvimento do projeto.
 - **JUnit 4**: Framework de testes usado para implementar o Desenvolvimento Orientado a Testes (TDD).
 - **Git**: Sistema de controle de versão para rastreamento de mudanças no código.
-- **IDE (como IntelliJ ou Eclipse)**: Ambiente de desenvolvimento integrado para facilitar a codificação e testes.
+- **IDE (Eclipse)**: Ambiente de desenvolvimento integrado para facilitar a codificação e testes.
 
 ### Objetivos
 
@@ -49,7 +49,3 @@
 - Java e JUnit 4:
     - O projeto deve ser desenvolvido em Java utilizando o JUnit 4 como framework de testes.
     - Outras linguagens e frameworks não são permitidos e resultarão em zero na avaliação.
-
-### Referências 
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed in sodales nisi. Aliquam in augue justo. Curabitur ornare ornare tellus, mattis accumsan dolor pellentesque interdum. Phasellus ex augue, vestibulum ac vulputate at, elementum vitae mi. Fusce viverra facilisis ante vitae dictum. Vestibulum sollicitudin malesuada lobortis.
