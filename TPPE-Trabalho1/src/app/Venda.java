@@ -14,8 +14,7 @@ public class Venda {
 	private boolean cartaoCreditoEhDaLoja;
 	private int valorFrete;
 	private int desconto;
-	private int ICMS;
-	private int municipal;
+	private int valorImpostos;
 	private int valorFinal;
 
 	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento) {
@@ -27,6 +26,7 @@ public class Venda {
 		this.metodoPagamento = metodoPagamento;
 		this.cartaoCreditoEhDaLoja = false;
 		this.valorFrete = calculaFrete();
+		calculaImpostos();
 	}
 	
 	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento, String cartaoCredito) {
@@ -38,6 +38,7 @@ public class Venda {
 		this.metodoPagamento = metodoPagamento;
 		this.cartaoCreditoEhDaLoja = verificaCartaoCredito(cartaoCredito);
 		this.valorFrete = calculaFrete();
+		calculaImpostos();
 	}
 	
 	public int getId() {
@@ -128,6 +129,13 @@ public class Venda {
 		}
 		
 		return valFrete;
+	}
+	
+	private void calculaImpostos() {
+		this.valorImpostos = 0;
+		for ( ProdutoVenda pv : produtos ) {
+			this.valorImpostos += pv.getICMS() + pv.getMunicipal();
+		}
 	}
 	
 }

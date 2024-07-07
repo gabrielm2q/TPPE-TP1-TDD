@@ -40,7 +40,7 @@ public class TesteVendaVerificaCartaoCredito {
 	@Parameters
 	public static Collection<Object[]> getParameters() {
 		Produto produto1 = new Produto(1, "areia", 15000 , "m3");
-		ProdutoVenda produtoVenda1 = new ProdutoVenda(produto1, 1);
+		ProdutoVenda produtoVenda1 = new ProdutoVenda(produto1, 1, 0);
 		LocalDateTime date1 = LocalDateTime.now().minusDays(1);
 		Cliente cliente1 = new Cliente(1, "Paulinho Antonio", 2 , true, true);
 		
