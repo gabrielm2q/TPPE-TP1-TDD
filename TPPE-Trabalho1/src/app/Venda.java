@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 
 public class Venda {
-	private int id; // id da Compra
+	private int id; // ID da Compra
 	private ArrayList<ProdutoVenda> produtos;
 	private Cliente cliente;
 	private int valorTotal;
@@ -17,12 +17,6 @@ public class Venda {
 	private int ICMS;
 	private int municipal;
 	private int valorFinal;
-//	valorFinal =  (valorTotal *1,1)*0,9
-//    100 > 110
-//    90 > 100
-	
-	
-	// descontos
 
 	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento) {
 		super();
@@ -31,6 +25,8 @@ public class Venda {
 		this.cliente = cliente;
 		this.data = data;
 		this.metodoPagamento = metodoPagamento;
+		this.cartaoCreditoEhDaLoja = false;
+		this.valorFrete = calculaFrete();
 	}
 	
 	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento, String cartaoCredito) {
@@ -40,6 +36,8 @@ public class Venda {
 		this.cliente = cliente;
 		this.data = data;
 		this.metodoPagamento = metodoPagamento;
+		this.cartaoCreditoEhDaLoja = verificaCartaoCredito(cartaoCredito);
+		this.valorFrete = calculaFrete();
 	}
 	
 	public int getId() {
@@ -89,6 +87,34 @@ public class Venda {
 			valorTotal += produtos.get(i).getValorParcial();
 		}
 		return valorTotal;
+	}
+
+	public int calculaFrete() {
+		int valFrete = 0;
+		switch ( this.cliente.getRegiao() ) {
+			case 0:
+				valFrete = ( this.cliente.getEhCapital() ? 500 : 0 );
+				break;
+			case 1:
+				valFrete = ( this.cliente.getEhCapital() ? 1000 : 1300 );
+				break;
+			case 2:
+				valFrete = ( this.cliente.getEhCapital() ? 1500 : 1800 );
+				break;
+			case 3:
+				valFrete = ( this.cliente.getEhCapital() ? 2000 : 2500 );
+				break;
+			case 4:
+				valFrete = ( this.cliente.getEhCapital() ? 700 : 1000 );
+				break;
+			case 5:
+				valFrete = ( this.cliente.getEhCapital() ? 1000 : 1300 );
+				break;
+			default:
+				valFrete = 0;
+		}
+		
+		return valFrete;
 	}
 	
 }
