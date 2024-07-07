@@ -24,10 +24,11 @@ public class Venda {
 		this.cliente = cliente;
 		this.data = data;
 		this.metodoPagamento = metodoPagamento;
-		this.cartaoCreditoEhDaLoja = false;
+		this.cartaoCreditoEhDaLoja = verificaCartaoCredito(null);
 		this.valorFrete = calculaFrete();
 		calculaImpostos();
 		calculaValorTotal();
+		calculaValorFinal();
 	}
 	
 	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento, String cartaoCredito) {
@@ -41,6 +42,7 @@ public class Venda {
 		this.valorFrete = calculaFrete();
 		calculaImpostos();
 		calculaValorTotal();
+		calculaValorFinal();
 	}
 	
 	public int getId() {
@@ -89,10 +91,23 @@ public class Venda {
 		return this.valorFrete;
 	}
 	
+	public int getValorFinal() {
+		return this.valorFinal;
+	}
+	
 	public boolean verificaCartaoCredito(String cartaoCredito) {
 		cartaoCredito = ( cartaoCredito == null || cartaoCredito.length() < 16 ? "XXXX XXXX XXXX XXXX" : cartaoCredito.replaceAll("\s", "") );
-		if ( this.metodoPagamento.equals("CREDITO") && cartaoCredito.substring(0, 7).equals("429613") ) return true;
+		if ( this.metodoPagamento.equals("CREDITO") && cartaoCredito.substring(0, 6).equals("429613") ) return true;
 		return false;
+	}
+	
+	private void calculaValorFinal() {
+		if ( this.cliente.getEhEspecial() ) {
+			this.valorFinal = (int) (this.valorTotal * ( this.cartaoCreditoEhDaLoja ? 0.8 : 0.9 ));
+			this.desconto += (int) (this.valorTotal * ( this.cartaoCreditoEhDaLoja ? 0.2 : 0.1 ));
+		} else {
+			this.valorFinal = this.valorTotal;
+		}
 	}
 	
 	private void calculaValorTotal() {

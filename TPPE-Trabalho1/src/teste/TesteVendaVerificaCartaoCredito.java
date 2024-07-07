@@ -53,7 +53,7 @@ public class TesteVendaVerificaCartaoCredito {
 			{3, produtos1, cliente1, date1, "PIX", "1234 5678 9123 4567", false},
 			{4, produtos1, cliente1, date1, "CREDITO", "1234 5678 9123 4567", false},
 			{5, produtos1, cliente1, date1, "CREDITO", "1234", false},
-			{6, produtos1, cliente1, date1, "CREDITO", "4296 1311 1111 2222", false},
+			{6, produtos1, cliente1, date1, "CREDITO", "4296 1311 1111 2222", true},
 		};
 		
 		return Arrays.asList(parametros);
