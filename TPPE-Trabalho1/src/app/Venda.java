@@ -16,6 +16,7 @@ public class Venda {
 	private int desconto;
 	private int valorImpostos;
 	private int valorFinal;
+	private int valorCashback;
 
 	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento) {
 		super();
@@ -29,6 +30,7 @@ public class Venda {
 		calculaImpostos();
 		calculaValorTotal();
 		calculaValorFinal();
+		calculaValorCashback();
 	}
 	
 	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento, String cartaoCredito) {
@@ -43,6 +45,7 @@ public class Venda {
 		calculaImpostos();
 		calculaValorTotal();
 		calculaValorFinal();
+		calculaValorCashback();
 	}
 	
 	public int getId() {
@@ -95,10 +98,26 @@ public class Venda {
 		return this.valorFinal;
 	}
 	
+	public int getValorCashback() {
+		return this.valorCashback;
+	}
+	
 	public boolean verificaCartaoCredito(String cartaoCredito) {
 		cartaoCredito = ( cartaoCredito == null || cartaoCredito.length() < 16 ? "XXXX XXXX XXXX XXXX" : cartaoCredito.replaceAll("\s", "") );
 		if ( this.metodoPagamento.equals("CREDITO") && cartaoCredito.substring(0, 6).equals("429613") ) return true;
 		return false;
+	}
+	
+	private int calculaValorCashback() {
+		this.valorCashback = 0;
+		
+		if ( this.cliente.getEhPrime() ) {
+			this.valorCashback = ((this.valorFinal / 100) * 100);
+			this.valorCashback = (int) (this.valorFinal * ( this.cartaoCreditoEhDaLoja ? 0.05 : 0.03 ));
+			this.cliente.setSaldoCashback(this.cliente.getSaldoCashback() + this.valorCashback);
+		}
+		
+		return this.valorCashback;
 	}
 	
 	private void calculaValorFinal() {
@@ -107,6 +126,16 @@ public class Venda {
 			this.desconto += (int) (this.valorTotal * ( this.cartaoCreditoEhDaLoja ? 0.2 : 0.1 ));
 		} else {
 			this.valorFinal = this.valorTotal;
+		}
+		
+		if ( this.cliente.getEhPrime() ) {
+			if ( this.valorFinal >= this.cliente.getSaldoCashback() ) {
+				this.valorFinal -= this.cliente.getSaldoCashback();
+				this.cliente.setSaldoCashback(0);
+			} else {
+				this.cliente.setSaldoCashback(this.cliente.getSaldoCashback() - this.valorFinal);
+				this.valorFinal = 0;
+			}
 		}
 	}
 	
