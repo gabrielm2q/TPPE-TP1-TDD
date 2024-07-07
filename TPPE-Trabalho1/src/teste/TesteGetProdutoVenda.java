@@ -27,9 +27,9 @@ public class TesteGetProdutoVenda {
 		Produto produto1 = new Produto(1, "areia", 15000 , "m3");
 		Produto produto2 = new Produto(2, "cimento", 5000 , "saco");
 		Produto produto3 = new Produto(3, "tauba", 2000 , "unidade");
-		ProdutoVenda produtoVenda1 = new ProdutoVenda(produto1, 1);
-		ProdutoVenda produtoVenda2 = new ProdutoVenda(produto2, 2);
-		ProdutoVenda produtoVenda3 = new ProdutoVenda(produto3, 3);
+		ProdutoVenda produtoVenda1 = new ProdutoVenda(produto1, 1, 0);
+		ProdutoVenda produtoVenda2 = new ProdutoVenda(produto2, 2, 0);
+		ProdutoVenda produtoVenda3 = new ProdutoVenda(produto3, 3, 0);
 		
 		Object[][] parametros = new Object[][] {
 			{produtoVenda1, produto1},

@@ -52,7 +52,7 @@ public class Loja {
             .collect(Collectors.toList());
 
         int totalCompras = vendasDoCliente.stream()
-            .mapToInt(Venda::calculaValorTotal)
+            .mapToInt(Venda::getValorTotal)
             .sum();
 
         /*

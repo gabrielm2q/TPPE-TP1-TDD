@@ -60,10 +60,10 @@ public class TesteLojaValidacaoClienteEspecial {
 		
 		LocalDateTime dataAtual = LocalDateTime.now();
 		
-		ProdutoVenda prodVenda1 = new ProdutoVenda(prod1, 4);
-		ProdutoVenda prodVenda2 = new ProdutoVenda(prod2, 3);
-		ProdutoVenda prodVenda3 = new ProdutoVenda(prod3, 2);
-		ProdutoVenda prodVenda4 = new ProdutoVenda(prod4, 1);
+		ProdutoVenda prodVenda1 = new ProdutoVenda(prod1, 4, 0);
+		ProdutoVenda prodVenda2 = new ProdutoVenda(prod2, 3, 0);
+		ProdutoVenda prodVenda3 = new ProdutoVenda(prod3, 2, 0);
+		ProdutoVenda prodVenda4 = new ProdutoVenda(prod4, 1, 0);
 		
 		ArrayList<ProdutoVenda> prods1 = new ArrayList<ProdutoVenda>();
 		ArrayList<ProdutoVenda> prods2 = new ArrayList<ProdutoVenda>();

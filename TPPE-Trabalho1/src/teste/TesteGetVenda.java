@@ -39,9 +39,9 @@ public class TesteGetVenda {
 		Produto produto2 = new Produto(2, "cimento", 5000 , "saco");
 		Produto produto3 = new Produto(3, "tauba", 2000 , "unidade");
 		
-		ProdutoVenda produtoVenda1 = new ProdutoVenda(produto1, 1);
-		ProdutoVenda produtoVenda2 = new ProdutoVenda(produto2, 2);
-		ProdutoVenda produtoVenda3 = new ProdutoVenda(produto3, 3);
+		ProdutoVenda produtoVenda1 = new ProdutoVenda(produto1, 1, 0);
+		ProdutoVenda produtoVenda2 = new ProdutoVenda(produto2, 2, 0);
+		ProdutoVenda produtoVenda3 = new ProdutoVenda(produto3, 3, 0);
 		
 		LocalDateTime date1 = LocalDateTime.now().minusDays(1);
 		LocalDateTime date2 = LocalDateTime.now().minusDays(7);
