@@ -18,7 +18,7 @@ public class Venda {
 	private int municipal;
 	private int valorFinal;
 
-	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento) {
+	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento, boolean ehEspecial) {
 		super();
 		this.id = id;
 		this.produtos = produtos;
@@ -26,10 +26,10 @@ public class Venda {
 		this.data = data;
 		this.metodoPagamento = metodoPagamento;
 		this.cartaoCreditoEhDaLoja = false;
-		this.valorFrete = calculaFrete();
+		this.valorFrete = calculaFrete(ehEspecial);
 	}
 	
-	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento, String cartaoCredito) {
+	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento, boolean ehEspecial, String cartaoCredito) {
 		super();
 		this.id = id;
 		this.produtos = produtos;
@@ -37,7 +37,7 @@ public class Venda {
 		this.data = data;
 		this.metodoPagamento = metodoPagamento;
 		this.cartaoCreditoEhDaLoja = verificaCartaoCredito(cartaoCredito);
-		this.valorFrete = calculaFrete();
+		this.valorFrete = calculaFrete(ehEspecial);
 	}
 	
 	public int getId() {
@@ -89,7 +89,7 @@ public class Venda {
 		return valorTotal;
 	}
 
-	public int calculaFrete() {
+	public int calculaFrete(boolean ehEspecial) {
 		int valFrete = 0;
 		switch ( this.cliente.getRegiao() ) {
 			case 0:
@@ -112,6 +112,16 @@ public class Venda {
 				break;
 			default:
 				valFrete = 0;
+		}
+		
+		if ( this.cliente.getEhPrime() ) {
+			this.desconto += valFrete;
+			return 0;
+		}
+		
+		if ( ehEspecial ) {
+			this.desconto += (int) ( valFrete * 0.3 );
+			valFrete = (int) ( valFrete * 0.7 );
 		}
 		
 		return valFrete;
