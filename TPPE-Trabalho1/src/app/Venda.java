@@ -10,11 +10,13 @@ public class Venda {
 	private Cliente cliente;
 	private int valorTotal;
 	private LocalDateTime data;
-//	private String metodoPagamento;
-//	private int valorFrete;
-//	private int desconto;
-//	private int ICMS;
-//	private int municipal;
+	private String metodoPagamento; // "PIX", "DEBITO", "CREDITO", "BOLETO"
+	private boolean cartaoCreditoEhDaLoja;
+	private int valorFrete;
+	private int desconto;
+	private int ICMS;
+	private int municipal;
+	private int valorFinal;
 //	valorFinal =  (valorTotal *1,1)*0,9
 //    100 > 110
 //    90 > 100
@@ -22,12 +24,22 @@ public class Venda {
 	
 	// descontos
 
-	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data) {
+	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento) {
 		super();
 		this.id = id;
 		this.produtos = produtos;
 		this.cliente = cliente;
 		this.data = data;
+		this.metodoPagamento = metodoPagamento;
+	}
+	
+	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento, String cartaoCredito) {
+		super();
+		this.id = id;
+		this.produtos = produtos;
+		this.cliente = cliente;
+		this.data = data;
+		this.metodoPagamento = metodoPagamento;
 	}
 	
 	public int getId() {
@@ -62,6 +74,12 @@ public class Venda {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+	
+	public boolean verificaCartaoCredito(String cartaoCredito) {
+		cartaoCredito = ( cartaoCredito == null || cartaoCredito.length() < 16 ? "XXXX XXXX XXXX XXXX" : cartaoCredito.replaceAll("\s", "") );
+		if ( this.metodoPagamento.equals("CREDITO") && cartaoCredito.substring(0, 7).equals("429613") ) return true;
+		return false;
 	}
 
 	
