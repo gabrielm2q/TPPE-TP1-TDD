@@ -22,16 +22,15 @@ public class TesteGetVenda {
 	private int id;
 	private ArrayList<ProdutoVenda> produtos;
 	private Cliente cliente;
-	private int valorTotal;
 	private LocalDateTime data;
+	private String metodoPagamento;
 	
-	public TesteGetVenda (Venda venda, int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, int valorTotal, LocalDateTime data) {
-		this.venda = venda;
+	public TesteGetVenda (int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento) {
 		this.id = id;
 		this.produtos = produtos;
 		this.cliente = cliente;
-		this.valorTotal = valorTotal;
 		this.data = data;
+		this.metodoPagamento = metodoPagamento;
 	}
 	
 	@Parameters
@@ -64,16 +63,14 @@ public class TesteGetVenda {
 		
 		ArrayList<ProdutoVenda> produtos4 = new ArrayList<ProdutoVenda>();
 		
-		Venda venda1 = new Venda(1, produtos1, cliente1, date1);
-		Venda venda2 = new Venda(2, produtos2, cliente1, date2);
-		Venda venda3 = new Venda(3, produtos3, cliente1, date3);
-		Venda venda4 = new Venda(4, produtos4, cliente1, date4);
+		String metPag1 = "PIX";
+		String metPag2 = "BOLETO";
 		
 		Object[][] parametros = new Object[][] {
-			{venda1, 1, produtos1, cliente1, 31000, date1},
-			{venda2, 2, produtos2, cliente1, 25000, date2},
-			{venda3, 3, produtos3, cliente1, 15000, date3},
-			{venda4, 4, produtos4, cliente1, 0, date4}
+			{1, produtos1, cliente1, date1, metPag1},
+			{2, produtos2, cliente1, date2, metPag1},
+			{3, produtos3, cliente1, date3, metPag2},
+			{4, produtos4, cliente1, date4, metPag2}
 		};
 		
 		return Arrays.asList(parametros);
@@ -81,11 +78,13 @@ public class TesteGetVenda {
 	
 	@Test 
 	public void calcVendaAttributes() {
+		venda = new Venda(id, produtos, cliente, data, metodoPagamento);
+		
 		assertEquals(venda.getId(), id);
 		assertEquals(venda.getProdutos(), produtos);
 		assertEquals(venda.getCliente(), cliente);
-		assertEquals(venda.calculaValorTotal(), valorTotal);
 		assertEquals(venda.getData(), data);
+		assertEquals(venda.getMetodoPagamento(), metodoPagamento);
 	}
 
 }

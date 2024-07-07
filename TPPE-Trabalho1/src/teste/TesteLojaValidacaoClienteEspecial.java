@@ -74,11 +74,13 @@ public class TesteLojaValidacaoClienteEspecial {
 		prods1.add(prodVenda3);
 		prods1.add(prodVenda4);
 		
-		Venda venda1 = new Venda(1, prods1, cli1, dataAtual);
-		Venda venda2 = new Venda(2, prods1, cli2, dataAtual.minusDays(15));
-		Venda venda3 = new Venda(3, prods4, cli2, dataAtual.minusDays(31));
-		Venda venda4 = new Venda(4, prods3, cli4, dataAtual.minusDays(31));
-		Venda venda5 = new Venda(5, prods2, cli4, dataAtual.minusDays(32));
+		String metodoPagamento = "PIX";
+		
+		Venda venda1 = new Venda(1, prods1, cli1, dataAtual, metodoPagamento);
+		Venda venda2 = new Venda(2, prods1, cli2, dataAtual.minusDays(15), metodoPagamento);
+		Venda venda3 = new Venda(3, prods4, cli2, dataAtual.minusDays(31), metodoPagamento);
+		Venda venda4 = new Venda(4, prods3, cli4, dataAtual.minusDays(31), metodoPagamento);
+		Venda venda5 = new Venda(5, prods2, cli4, dataAtual.minusDays(32), metodoPagamento);
 		
 		loja.cadastrarVenda(venda1);
 		loja.cadastrarVenda(venda2);
