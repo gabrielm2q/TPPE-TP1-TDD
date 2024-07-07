@@ -59,7 +59,10 @@ public class Loja {
          * Caso o cliente tenha comprado mais de 100 reais 
          * no ultimo mes, ele eh um cliente especial
          * */
-        return (totalCompras > 10000 ? true : false); 
+        boolean ehEsp = (totalCompras > 10000 ? true : false);
+        cli.setEhEspecial(ehEsp);
+        
+        return ehEsp; 
     }
     
     // Cadastro Produto

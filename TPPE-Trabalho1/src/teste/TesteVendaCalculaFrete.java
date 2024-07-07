@@ -57,10 +57,13 @@ public class TesteVendaCalculaFrete {
 		Cliente cliente12 = new Cliente(12, "Antonio", 5, true, false);
 		
 		Cliente cliente13 = new Cliente(13, "Paulinho", 3, false, false);
+		cliente13.setEhEspecial(true);
 		Cliente cliente14 = new Cliente(14, "Antonio", 3, true, false);
+		cliente14.setEhEspecial(true);
 		
 		Cliente cliente15 = new Cliente(15, "Paulinho", 3, false, true);
 		Cliente cliente16 = new Cliente(16, "Antonio", 3, true, true);
+		cliente16.setEhEspecial(true);
 		
 		ArrayList<ProdutoVenda> produtos1 = new ArrayList<ProdutoVenda>();
 		produtos1.add(produtoVenda1);
@@ -93,9 +96,9 @@ public class TesteVendaCalculaFrete {
 	
 	@Test 
 	public void calcVendaAttributes() {
-		venda = new Venda(id, produtos, cliente, data, metodoPagamento, ehEspecial);
+		venda = new Venda(id, produtos, cliente, data, metodoPagamento);
 		
-		assertEquals(valorFrete, this.venda.calculaFrete(ehEspecial));
+		assertEquals(valorFrete, this.venda.calculaFrete());
 	}
 
 }

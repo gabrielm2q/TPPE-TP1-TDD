@@ -6,6 +6,7 @@ public class Cliente {
     private boolean ehPrime;
     private int regiao; // 0 - DF; 1 - Centro-Oeste; 2 - Nordeste; 3 - Norte; 4 - Sudeste; 5 - Sul;
     private boolean ehCapital;
+    private boolean ehEspecial;
     private int saldoCashback = 0; // valor em centavos   
 
     public Cliente(int id, String nome, int regiao, boolean ehCapital, boolean ehPrime) {
@@ -14,6 +15,7 @@ public class Cliente {
         this.regiao = regiao;
         this.ehCapital = ehCapital;
         this.ehPrime = ehPrime;
+        this.ehEspecial = false;
     }
 
 	public int getId() {
@@ -39,6 +41,14 @@ public class Cliente {
     public boolean getEhCapital() {
 		return ehCapital;
 	}
+    
+    public boolean getEhEspecial () {
+    	return ehEspecial;
+    }
+    
+    public void setEhEspecial (boolean ehEspecial) {
+    	this.ehEspecial = ehEspecial;
+    }
 
     public int getSaldoCashback() {
         return saldoCashback;
