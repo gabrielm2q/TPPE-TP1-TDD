@@ -1,33 +1,36 @@
 package app;
 
 import java.util.ArrayList;
+import java.util.Optional;
+import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 public class Loja {
 	private ArrayList<Cliente> clientes;
     private ArrayList<Produto> produtos;
     private ArrayList<Venda> vendas;
-	// lista de compras -> pra ver se eh especial
 
-    // Loja
     public Loja() {
         this.clientes = new ArrayList<>();
         this.produtos = new ArrayList<>();
         this.vendas = new ArrayList<>();
-        inicializarCliente();
-        inicializarProdutos();
     }
     
-    private void inicializarCliente() {
-    	clientes.add(new Cliente(1, "Mariana", 2, true, true));
-    	clientes.add(new Cliente(2, "Paulinho Antônio", 2, true, true));
-    	clientes.add(new Cliente(3, "Paulinho Antônio", 2, false, false));
+    public ArrayList<Cliente> getClientes() {
+    	return clientes;
     }
     
-    private void inicializarProdutos() {
-        produtos.add(new Produto(1, "areia", 15000 , "m3"));
-        produtos.add(new Produto(2, "cimento", 5000 , "saco"));
-        produtos.add(new Produto(3, "tauba", 2000 , "unidade"));
+    public ArrayList<Produto> getProdutos() {
+    	return produtos;
+    }	
+    
+    public Cliente getClienteById (int idCliente) {
+    	Optional<Cliente> foundClient = (Optional<Cliente>) clientes.stream()
+    			.filter(cli -> cli.getId() == idCliente)
+                .findFirst();
+    	
+
+    	return foundClient.orElseThrow();
     }
     
     // Cadastro Cliente
@@ -36,20 +39,27 @@ public class Loja {
         clientes.add(novoCliente);
     }
     
-    public void validarTipoCliente(Cliente cliente) {
+    public void cadastrarCliente(Cliente cli) {
+    	clientes.add(cli);
+    }
+    
+    public boolean ehEspecial (Cliente cli) {
+    	LocalDateTime dataAtual = LocalDateTime.now();
+    	
         ArrayList<Venda> vendasDoCliente = (ArrayList<Venda>) vendas.stream()
-            .filter(venda -> venda.getCliente().getId() == cliente.getId())
+            .filter(venda -> venda.getCliente().getId() == cli.getId())
+            .filter(venda -> venda.getData().isAfter(dataAtual.minusDays(30)))
             .collect(Collectors.toList());
 
         int totalCompras = vendasDoCliente.stream()
             .mapToInt(Venda::calculaValorTotal)
             .sum();
 
-        if (totalCompras > 50000) { // Exemplo: mais de 500 reais
-            cliente.setEhPrime(true);
-        } else {
-            cliente.setEhPrime(false);
-        }
+        /*
+         * Caso o cliente tenha comprado mais de 100 reais 
+         * no ultimo mes, ele eh um cliente especial
+         * */
+        return (totalCompras > 10000 ? true : false); 
     }
     
     // Cadastro Produto
@@ -58,17 +68,13 @@ public class Loja {
         produtos.add(novoProduto);
     }
     
+    public void cadastrarProduto(Produto novoProduto) {
+        produtos.add(novoProduto);
+    }
+    
     // Venda
-    public void realizarVenda(Venda venda) {
-        vendas.add(venda);
-        // Realizar cálculos de frete, descontos, impostos, etc.
+    public void cadastrarVenda(Venda venda) {
+        vendas.add(venda); // Realizar cálculos de frete, descontos, impostos, etc.
     }
     
-    public ArrayList<Cliente> getClientes() {
-        return clientes;
-    }
-    
-    public ArrayList<Produto> getProdutos() {
-        return produtos;
-    }	
 }
