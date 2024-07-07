@@ -27,6 +27,7 @@ public class Venda {
 		this.cartaoCreditoEhDaLoja = false;
 		this.valorFrete = calculaFrete();
 		calculaImpostos();
+		calculaValorTotal();
 	}
 	
 	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento, String cartaoCredito) {
@@ -39,6 +40,7 @@ public class Venda {
 		this.cartaoCreditoEhDaLoja = verificaCartaoCredito(cartaoCredito);
 		this.valorFrete = calculaFrete();
 		calculaImpostos();
+		calculaValorTotal();
 	}
 	
 	public int getId() {
@@ -79,22 +81,29 @@ public class Venda {
 		this.cliente = cliente;
 	}
 	
+	public int getValorTotal() {
+		return this.valorTotal;
+	}
+	
+	public int getValorFrete() {
+		return this.valorFrete;
+	}
+	
 	public boolean verificaCartaoCredito(String cartaoCredito) {
 		cartaoCredito = ( cartaoCredito == null || cartaoCredito.length() < 16 ? "XXXX XXXX XXXX XXXX" : cartaoCredito.replaceAll("\s", "") );
 		if ( this.metodoPagamento.equals("CREDITO") && cartaoCredito.substring(0, 7).equals("429613") ) return true;
 		return false;
 	}
-
 	
-	public int calculaValorTotal() {
-		valorTotal = 0;
-		for (int i = 0; i < produtos.size(); i++) {
-			valorTotal += produtos.get(i).getValorParcial();
+	private void calculaValorTotal() {
+		this.valorTotal = 0;
+		for (ProdutoVenda pv : produtos) {
+			valorTotal += pv.getValorParcial();
 		}
-		return valorTotal;
+		this.valorTotal += this.valorFrete;
 	}
 
-	public int calculaFrete() {
+	private int calculaFrete() {
 		int valFrete = 0;
 		switch ( this.cliente.getRegiao() ) {
 			case 0:

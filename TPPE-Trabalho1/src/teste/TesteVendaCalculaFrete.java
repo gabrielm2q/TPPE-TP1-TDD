@@ -95,10 +95,10 @@ public class TesteVendaCalculaFrete {
 	}
 	
 	@Test 
-	public void calcVendaAttributes() {
+	public void calcValorFrete() {
 		venda = new Venda(id, produtos, cliente, data, metodoPagamento);
 		
-		assertEquals(valorFrete, this.venda.calculaFrete());
+		assertEquals(valorFrete, this.venda.getValorFrete());
 	}
 
 }

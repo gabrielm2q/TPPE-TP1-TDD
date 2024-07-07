@@ -60,7 +60,7 @@ public class TesteVendaVerificaCartaoCredito {
 	}
 	
 	@Test 
-	public void calcVendaAttributes() {
+	public void verificaCartaoCredito() {
 		if ( cartaoCredito.equals("") ) {
 			venda = new Venda(id, produtos, cliente, data, metodoPagamento);
 		} else {
