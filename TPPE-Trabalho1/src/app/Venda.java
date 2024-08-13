@@ -147,29 +147,18 @@ public class Venda {
 		this.valorTotal += this.valorFrete;
 	}
 
+	/*
+	 * Foi aplicada a operacao de refatoracao Extrair Metodo,
+	 * onde o trecho de codigo responsavel por calcular o valor 
+	 * base do frete foi extraido para um novo metodo separado,
+	 * o metodo getValorBaseFrete().
+	 * 
+	 * Apos a operacao de refatoracao, os testes previamente 
+	 * desenvolvidos foram executados com sucesso, indicando 
+	 * a inalteracao da logica original do codigo.
+	 * */
 	private int calculaFrete() {
-		int valFrete = 0;
-		switch ( this.cliente.getRegiao() ) {
-			case 0:
-				valFrete = ( this.cliente.getEhCapital() ? 500 : 0 );
-				break;
-			case 1:
-				valFrete = ( this.cliente.getEhCapital() ? 1000 : 1300 );
-				break;
-			case 2:
-				valFrete = ( this.cliente.getEhCapital() ? 1500 : 1800 );
-				break;
-			case 3:
-				valFrete = ( this.cliente.getEhCapital() ? 2000 : 2500 );
-				break;
-			case 4:
-				valFrete = ( this.cliente.getEhCapital() ? 700 : 1000 );
-				break;
-			case 5:
-			default:
-				valFrete = ( this.cliente.getEhCapital() ? 1000 : 1300 );
-				break;
-		}
+		int valFrete = getValorBaseFrete();
 		
 		if ( this.cliente.getEhPrime() ) {
 			this.desconto += valFrete;
@@ -182,6 +171,34 @@ public class Venda {
 		}
 		
 		return valFrete;
+	}
+
+	/**
+	 * O metodo abaixo foi gerado apos a aplicacao da 
+	 * operacao de refatoracao "Extrair Metodo" sobre
+	 * um trecho do metodo calculaFrete().
+	 * 
+	 * Alem disso, os retornos foram simplificados e o 
+	 * uso da funcao cliente.getEhCapital() foi reduzido
+	 * apos a atribuicao de seu valor a uma variavel.
+	 */
+	private int getValorBaseFrete() {
+		boolean ehCapital = this.cliente.getEhCapital();
+		switch ( this.cliente.getRegiao() ) {
+			case 0:
+				return ( ehCapital ? 500 : 0 );
+			case 1:
+				return ( ehCapital ? 1000 : 1300 );
+			case 2:
+				return ( ehCapital ? 1500 : 1800 );
+			case 3:
+				return ( ehCapital ? 2000 : 2500 );
+			case 4:
+				return ( ehCapital ? 700 : 1000 );
+			case 5:
+			default:
+				return ( ehCapital ? 1000 : 1300 );
+		}
 	}
 	
 	private void calculaImpostos() {
