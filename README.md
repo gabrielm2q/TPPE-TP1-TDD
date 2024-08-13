@@ -31,33 +31,33 @@
 <details>
     <summary>CLIQUE PARA EXIBIR OS REQUISITOS</summary>
     <h4>Funcionais</h4>
-    <ul>
-        <li>Cadastro de Clientes:</li>
-            <li>- Implementar classes para os três tipos de clientes: padrão, especial e prime.</li>
-            <li>- Cada cliente deve ter atributos como nome, tipo de cliente, e endereço (estado e se é capital ou interior).</li>
-        <li>Cadastro de Produtos:</li>
-            <li>- Implementar uma classe para representar diferentes tipos de produtos.</li>
-            <li>- Cada produto deve ter atributos como código do item, descrição, valor de venda e unidade de medida (por exemplo, peça, unidade, metro, cm³).</li>
-        <li>Realização de Vendas:</li>
-            <li>- Implementar uma classe Venda que registre a data da venda, cliente, lista de itens vendidos e método de pagamento.</li>
-            <li>- Calcular o valor do frete, descontos (se houver), impostos (ICMS e municipal).</li>
-            <li>- Clientes prime podem usar saldo de cashback para abater na compra.</li>
-            <li>Cálculo de Vendas do Último Mês:</li>
-            <li>- Implementar métodos para calcular o valor das vendas realizadas no último mês para cada cliente.</li>
-            <li>- Verificar se um cliente é elegível para se tornar cliente especial com base em critérios específicos (por exemplo, total de compras).</li>
-        <li>Cálculo de Cashback para Clientes Prime:</li>
-            <li>- Implementar o cálculo do saldo de cashback acumulado por clientes prime, baseado em percentuais das compras realizadas.</li>
-    </ul>
+    <dl>
+        <dt>Cadastro de Clientes:</dt>
+            <dd>- Implementar classes para os três tipos de clientes: padrão, especial e prime.</dd>
+            <dd>- Cada cliente deve ter atributos como nome, tipo de cliente, e endereço (estado e se é capital ou interior).</dd>
+        <dt>Cadastro de Produtos:</dt>
+            <dd>- Implementar uma classe para representar diferentes tipos de produtos.</dd>
+            <dd>- Cada produto deve ter atributos como código do item, descrição, valor de venda e unidade de medida (por exemplo, peça, unidade, metro, cm³).</dd>
+        <dt>Realização de Vendas:</dt>
+            <dd>- Implementar uma classe Venda que registre a data da venda, cliente, lista de itens vendidos e método de pagamento.</dd>
+            <dd>- Calcular o valor do frete, descontos (se houver), impostos (ICMS e municipal).</dd>
+            <dd>- Clientes prime podem usar saldo de cashback para abater na compra.</dd>
+            <dd>Cálculo de Vendas do Último Mês:</dd>
+            <dd>- Implementar métodos para calcular o valor das vendas realizadas no último mês para cada cliente.</dd>
+            <dd>- Verificar se um cliente é elegível para se tornar cliente especial com base em critérios específicos (por exemplo, total de compras).</dd>
+        <dt>Cálculo de Cashback para Clientes Prime:</dt>
+            <dd>- Implementar o cálculo do saldo de cashback acumulado por clientes prime, baseado em percentuais das compras realizadas.</dd>
+    </dl>
     <h4>Não Funcionais</h4>
-    <ul>
-        <li>TDD (Test-Driven Development):</li>
-            <li>- Desenvolver cada funcionalidade utilizando TDD, onde testes unitários são escritos antes da implementação do código.</li>
-            <li>- Cada classe e método deve ter pelo menos um caso de teste.</li>
-            <li>- Agrupar casos de testes relacionados em suites de testes quando apropriado.</li>
-        <li>Java e JUnit 4:</li>
-            <li>- O projeto deve ser desenvolvido em Java utilizando o JUnit 4 como framework de testes.</li>
-            <li>- Outras linguagens e frameworks não são permitidos e resultarão em zero na avaliação.</li>
-    </ul>
+    <dl>
+        <dt>TDD (Test-Driven Development):</dt>
+            <dd>- Desenvolver cada funcionalidade utilizando TDD, onde testes unitários são escritos antes da implementação do código.</dd>
+            <dd>- Cada classe e método deve ter pelo menos um caso de teste.</dd>
+            <dd>- Agrupar casos de testes relacionados em suites de testes quando apropriado.</dd>
+        <dt>Java e JUnit 4:</dt>
+            <dd>- O projeto deve ser desenvolvido em Java utilizando o JUnit 4 como framework de testes.</dd>
+            <dd>- Outras linguagens e frameworks não são permitidos e resultarão em zero na avaliação.</dd>
+    </dl>
 </details>
 
 ## Trabalho 02
