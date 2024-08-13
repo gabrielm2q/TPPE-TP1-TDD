@@ -7,15 +7,15 @@ import java.time.LocalDateTime;
 public class Venda {
 	private int id; // ID da Compra
 	private ArrayList<ProdutoVenda> produtos;
-	private Cliente cliente;
-	private int valorTotal;
+	Cliente cliente;
+	int valorTotal;
 	private LocalDateTime data;
 	private String metodoPagamento; // "PIX", "DEBITO", "CREDITO", "BOLETO"
-	private boolean cartaoCreditoEhDaLoja;
+	boolean cartaoCreditoEhDaLoja;
 	private int valorFrete;
-	private int desconto;
-	private int valorImpostos;
-	private int valorFinal;
+	int desconto;
+	int valorImpostos;
+	int valorFinal;
 	private int valorCashback;
 
 	public Venda(int id, ArrayList<ProdutoVenda> produtos, Cliente cliente, LocalDateTime data, String metodoPagamento) {
@@ -120,23 +120,22 @@ public class Venda {
 		return this.valorCashback;
 	}
 	
+	/*
+	 * Foi aplicada a operacao de refatoracao Substituir Metodo
+	 * por Metodo-Objeto onde, a partir de toda a logica de
+	 * implementacao do codigo que calcula o valor final da venda
+	 * foi movida para uma nova classe VendaFinalCalculator,
+	 * na qual, a partir dos atributos utilizados nesse calculo, 
+	 * ha um metodo ValorFinalCalculator::compute() responsavel
+	 * por executar a logica anteriormente desenvolvida e retornar
+	 * o valor final desejado.
+	 * 
+	 * Apos a operacao de refatoracao, os testes previamente 
+	 * desenvolvidos foram executados com sucesso, indicando 
+	 * a inalteracao da logica original do codigo.
+	 * */
 	private void calculaValorFinal() {
-		if ( this.cliente.getEhEspecial() ) {
-			this.valorFinal = (int) (this.valorTotal * ( this.cartaoCreditoEhDaLoja ? 0.8 : 0.9 ));
-			this.desconto += (int) (this.valorTotal * ( this.cartaoCreditoEhDaLoja ? 0.2 : 0.1 ));
-		} else {
-			this.valorFinal = this.valorTotal;
-		}
-		
-		if ( this.cliente.getEhPrime() ) {
-			if ( this.valorFinal >= this.cliente.getSaldoCashback() ) {
-				this.valorFinal -= this.cliente.getSaldoCashback();
-				this.cliente.setSaldoCashback(0);
-			} else {
-				this.cliente.setSaldoCashback(this.cliente.getSaldoCashback() - this.valorFinal);
-				this.valorFinal = 0;
-			}
-		}
+		this.valorFinal = new ValorFinalCalculator(this).compute();
 	}
 	
 	private void calculaValorTotal() {
