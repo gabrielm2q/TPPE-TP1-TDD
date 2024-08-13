@@ -42,7 +42,7 @@
             <dd>- Implementar uma classe Venda que registre a data da venda, cliente, lista de itens vendidos e método de pagamento.</dd>
             <dd>- Calcular o valor do frete, descontos (se houver), impostos (ICMS e municipal).</dd>
             <dd>- Clientes prime podem usar saldo de cashback para abater na compra.</dd>
-            <dd>Cálculo de Vendas do Último Mês:</dd>
+        <dt>Cálculo de Vendas do Último Mês:</dt>
             <dd>- Implementar métodos para calcular o valor das vendas realizadas no último mês para cada cliente.</dd>
             <dd>- Verificar se um cliente é elegível para se tornar cliente especial com base em critérios específicos (por exemplo, total de compras).</dd>
         <dt>Cálculo de Cashback para Clientes Prime:</dt>
