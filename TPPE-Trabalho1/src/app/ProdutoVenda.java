@@ -1,17 +1,27 @@
 package app;
 
 public class ProdutoVenda {
-	private Produto produto;
-	private int quantidade;
-	private int icms;
-	private int municipal;
+	Produto produto;
+	int quantidade;
+	
+	/*
+	 * Foi aplicada a operacao de refatoracao Extrair Classe,
+	 * onde foram removidos os atributos e metodos relativos
+	 * ao conceito de Impostos e foi criada uma nova classe
+	 * para tal conceito.
+	 * 
+	 * Apos a operacao de refatoracao, os testes previamente 
+	 * desenvolvidos foram executados com sucesso, indicando 
+	 * a inalteracao da logica original do codigo.
+	 * */
+	private Impostos taxas = new Impostos();
 	private int valorParcial;
 	
 	public ProdutoVenda(Produto produto, int quantidade, int regiao) {
 		super();
 		this.produto = produto;
 		this.quantidade = quantidade;
-		calculaImpostos(regiao);
+		taxas.calculaImpostos(this, regiao);
 		calculaValorParcial();
 	}
 	
@@ -36,23 +46,16 @@ public class ProdutoVenda {
 	}
 	
 	public int getICMS() {
-		return this.icms;
+		return this.taxas.getIcms();
 	}
 	
 	public int getMunicipal() {
-		return this.municipal;
-	}
-	
-	private void calculaImpostos(int regiao) {
-		int valorProduto = this.produto.getValor() * this.quantidade;
-		
-		this.icms = (int) ( regiao == 0 ? valorProduto * 0.18 : valorProduto * 0.12 );
-		this.municipal = (int) ( regiao == 0 ? 0 : valorProduto * 0.04 );
+		return this.taxas.getMunicipal();
 	}
 	
 	private void calculaValorParcial() {
 		this.valorParcial = this.produto.getValor() * this.quantidade;
-		this.valorParcial += this.icms + this.municipal;
+		this.valorParcial += this.taxas.getIcms() + this.taxas.getMunicipal();
 	}
 	
 }
